@@ -6,4 +6,5 @@ public class Passport {
     private String lastName;
     private String passportNumber;
     private Sex sex;
+    private Photo photo;
 }

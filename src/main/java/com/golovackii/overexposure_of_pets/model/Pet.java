@@ -11,7 +11,6 @@ abstract public class Pet {
     private Sex sex;
     private String color;
     private String description;
-    private List<User> petOwnerList;
     private Photo photo;
 
 }
