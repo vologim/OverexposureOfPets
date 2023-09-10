@@ -1,9 +1,21 @@
 package com.golovackii.overexposure_of_pets.model;
 
-import java.io.File;
+import jakarta.persistence.*;
+import lombok.*;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+@Table(name = "photo")
 public class Photo {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
-    private File photoFile;
-    private String photoPath;
+
+    @Column(name = "file_path")
+    private String pathPhoto;
 }

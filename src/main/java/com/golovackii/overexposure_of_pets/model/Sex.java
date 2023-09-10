@@ -1,23 +1,19 @@
 package com.golovackii.overexposure_of_pets.model;
 
-public enum Sex {
-    MALE("мальчик"),
-    FEMALE("девочка");
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-    private String title;
+@ToString
+@Getter
+public enum Sex {
+    MALE("муж"),
+    FEMALE("жен");
+
+    private final String title;
 
     Sex(String title) {
         this.title = title;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
-    public String toString() {
-        return "Sex{" +
-                "title='" + title + '\'' +
-                '}';
     }
 }
