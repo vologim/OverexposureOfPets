@@ -11,7 +11,26 @@ CREATE TABLE address
 CREATE TABLE photo
 (
     id SERIAL PRIMARY KEY,
-    file_path TEXT NOT NULL
+    file_path TEXT
+);
+
+CREATE TABLE pet
+(
+    id SERIAL PRIMARY KEY,
+    name varchar(20),
+    pet_date_birth DATE,
+    sex varchar(10),
+    breed varchar(20),
+    color varchar(20),
+    description TEXT
+);
+
+CREATE TABLE photo_pet
+(
+    pet_id int,
+    photo_id int,
+    FOREIGN KEY (pet_id) REFERENCES pet(id),
+    FOREIGN KEY (photo_id) REFERENCES photo(id)
 );
 
 CREATE TABLE phone_number
@@ -26,31 +45,7 @@ CREATE TABLE passport
     first_name varchar(20) NOT NULL,
     last_name varchar(20) NOT NULL,
     passport_number varchar(20) NOT NULL UNIQUE,
-    sex varchar(10) NOT NULL
-);
-
-CREATE TABLE cat
-(
-    id SERIAL PRIMARY KEY,
-    name varchar(20),
-    pet_date_birth DATE,
-    sex varchar(10),
-    breed varchar(20),
-    color varchar(20),
-    description TEXT,
-    photo_id int,
-    FOREIGN KEY (photo_id) REFERENCES photo(id)
-);
-
-CREATE TABLE dog
-(
-    id SERIAL PRIMARY KEY,
-    name varchar(20),
-    pet_date_birth DATE,
-    sex varchar(10),
-    breed varchar(20),
-    color varchar(20),
-    description TEXT,
+    sex varchar(10) NOT NULL,
     photo_id int,
     FOREIGN KEY (photo_id) REFERENCES photo(id)
 );
@@ -68,8 +63,7 @@ CREATE TABLE sitter
     description TEXT,
     FOREIGN KEY (phone_number_id) REFERENCES phone_number(id),
     FOREIGN KEY (address_id) REFERENCES address(id),
-    FOREIGN KEY (pet_id) REFERENCES cat(id),
-    FOREIGN KEY (pet_id) REFERENCES dog(id),
+    FOREIGN KEY (pet_id) REFERENCES pet(id),
     FOREIGN KEY (passport_id) REFERENCES passport(id)
 );
 
@@ -103,6 +97,5 @@ CREATE TABLE person
     pet_id int,
     FOREIGN KEY (phone_number_id) REFERENCES phone_number(id),
     FOREIGN KEY (address_id) REFERENCES address(id),
-    FOREIGN KEY (pet_id) REFERENCES cat(id),
-    FOREIGN KEY (pet_id) REFERENCES dog(id)
+    FOREIGN KEY (pet_id) REFERENCES pet(id)
 );

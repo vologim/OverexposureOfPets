@@ -27,8 +27,12 @@ public class SitterServiceImpl implements SitterService {
 
     @Override
     public Sitter update(Sitter element) throws NoEntityException {
-        return repository.save(repository.findById(element.getId()).orElseThrow(
-                () -> new NoEntityException(getMessage(element.getId()))));
+        Optional<Sitter> sitter = repository.findById(element.getId());
+        if(sitter.isPresent()) {
+            repository.save(element);
+            return element;
+        }
+        throw new NoEntityException(getMessage(element.getId()));
     }
 
     @Override

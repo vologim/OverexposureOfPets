@@ -27,8 +27,12 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person update(Person element) throws NoEntityException {
-        return repository.save(repository.findById(element.getId()).orElseThrow(
-                        () -> new NoEntityException(getMessage(element.getId()))));
+        Optional<Person> person = repository.findById(element.getId());
+        if(person.isPresent()) {
+            repository.save(element);
+            return element;
+        }
+        throw new NoEntityException(getMessage(element.getId()));
     }
 
     @Override

@@ -27,8 +27,12 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
 
     @Override
     public PhoneNumber update(PhoneNumber element) throws NoEntityException {
-        return repository.save(repository.findById(element.getId()).orElseThrow(
-                () -> new NoEntityException(getMessage(element.getId()))));
+        Optional<PhoneNumber> phoneNumber = repository.findById(element.getId());
+        if(phoneNumber.isPresent()) {
+            repository.save(element);
+            return element;
+        }
+        throw new NoEntityException(getMessage(element.getId()));
     }
 
     @Override

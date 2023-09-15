@@ -37,7 +37,7 @@ abstract public class User {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = Pet.class)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "pet_id")
     private List<Pet> pets;
 }

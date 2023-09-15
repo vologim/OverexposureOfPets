@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface BaseControllerCommands<T,E> {
 
-    T saveElement(E model) throws JsonProcessingException;
+    T saveElement(E model);
 
-    T updateElement(E model) throws JsonProcessingException, NoEntityException;
+    T updateElement(E model) throws NoEntityException;
 
     T getElementBuId(Integer id) throws NoEntityException;
 

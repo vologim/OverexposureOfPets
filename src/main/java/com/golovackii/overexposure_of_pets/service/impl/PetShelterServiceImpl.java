@@ -27,8 +27,12 @@ public class PetShelterServiceImpl implements PetShelterService {
 
     @Override
     public PetShelter update(PetShelter element) throws NoEntityException {
-        return repository.save(repository.findById(element.getId()).orElseThrow(
-                () -> new NoEntityException(getMessage(element.getId()))));
+        Optional<PetShelter> petShelter = repository.findById(element.getId());
+        if(petShelter.isPresent()) {
+            repository.save(element);
+            return element;
+        }
+        throw new NoEntityException(getMessage(element.getId()));
     }
 
     @Override

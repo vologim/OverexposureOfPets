@@ -27,9 +27,12 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public Address update(Address element) throws NoEntityException {
-        return repository.save(
-                repository.findById(element.getId()).orElseThrow(
-                        () -> new NoEntityException(getMessage(element.getId()))));
+        Optional<Address> address = repository.findById(element.getId());
+        if(address.isPresent()) {
+            repository.save(element);
+            return element;
+        }
+        throw new NoEntityException(getMessage(element.getId()));
     }
 
     @Override

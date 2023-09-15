@@ -32,6 +32,6 @@ public class Passport {
     private Sex sex;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "photo_id")
+    @JoinColumn(name = "passport_id")
     private List<Photo> photos;
 }

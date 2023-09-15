@@ -1,9 +1,9 @@
 package com.golovackii.overexposure_of_pets.service.impl;
 
 import com.golovackii.overexposure_of_pets.exception.NoEntityException;
-import com.golovackii.overexposure_of_pets.model.Cat;
-import com.golovackii.overexposure_of_pets.repository.CatRepository;
-import com.golovackii.overexposure_of_pets.service.CatService;
+import com.golovackii.overexposure_of_pets.model.Pet;
+import com.golovackii.overexposure_of_pets.repository.PetRepository;
+import com.golovackii.overexposure_of_pets.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,41 +11,45 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CatServiceImpl implements CatService {
+public class PetServiceImpl implements PetService {
 
-    private final CatRepository repository;
+    private final PetRepository repository;
 
     @Autowired
-    public CatServiceImpl(CatRepository repository) {
+    public PetServiceImpl(PetRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public Cat save(Cat element) {
+    public Pet save(Pet element) {
         return repository.save(element);
     }
 
     @Override
-    public Cat update(Cat element) throws NoEntityException {
-        return repository.save(repository.findById(element.getId()).orElseThrow(
-                () -> new NoEntityException(getMessage(element.getId()))));
+    public Pet update(Pet element) throws NoEntityException {
+        Optional<Pet> pet = repository.findById(element.getId());
+        if(pet.isPresent()) {
+            repository.save(element);
+            return element;
+        }
+        throw new NoEntityException(getMessage(element.getId()));
     }
 
     @Override
-    public Cat getById(Integer id) throws NoEntityException {
+    public Pet getById(Integer id) throws NoEntityException {
         return repository.findById(id).orElseThrow(
                 () -> new NoEntityException(getMessage(id)));
     }
 
     @Override
-    public List<Cat> getAllElements() {
+    public List<Pet> getAllElements() {
         return repository.findAll();
     }
 
     @Override
     public boolean deleteById(Integer id) throws NoEntityException {
-        Optional<Cat> cat = repository.findById(id);
-        if(cat.isPresent()) {
+        Optional<Pet> pet = repository.findById(id);
+        if(pet.isPresent()) {
             repository.deleteById(id);
             return true;
         }
@@ -53,6 +57,6 @@ public class CatServiceImpl implements CatService {
     }
 
     private String getMessage(int id) {
-        return "Cat id = " + id + " not found!";
+        return "Pet id = " + id + " not found!";
     }
 }

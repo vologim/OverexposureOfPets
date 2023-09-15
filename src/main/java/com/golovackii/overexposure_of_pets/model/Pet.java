@@ -2,18 +2,16 @@ package com.golovackii.overexposure_of_pets.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
+@Builder
 @Entity
-abstract public class Pet {
+public class Pet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +34,13 @@ abstract public class Pet {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "breed")
+    @Enumerated(EnumType.STRING)
+    private BreedPet breedPet;
+
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "photo_id")
+    @JoinTable(name = "photo_pet",
+    joinColumns = @JoinColumn(name = "pet_id"),
+    inverseJoinColumns = @JoinColumn(name = "photo_id"))
     private List<Photo> photos;
 }

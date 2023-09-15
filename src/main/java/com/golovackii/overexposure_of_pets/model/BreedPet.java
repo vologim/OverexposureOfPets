@@ -1,23 +1,30 @@
 package com.golovackii.overexposure_of_pets.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @ToString
 @Getter
-public enum BreedCat {
+public enum BreedPet {
     METIS("Метис"),
     BENGAL("Бенгальская"),
     PERSIAN("Персидская"),
     SIAMESE("Сиамская"),
     SIBERIAN("Сибирская"),
-    SPHYNX("Сфинкс");
+    SPHYNX("Сфинкс"),
+
+    //dogs
+    BULLDOG("Бульдог"),
+    CANES("Гончие"),
+    DOBERMAN("Доберман"),
+    MASTIFF("Мастиф"),
+    PUG("Мопс"),
+    DACHSHUND("Такса"),
+    MONGREL("Дворняжка");
 
     private final String title;
 
-    BreedCat(String title) {
+    BreedPet(String title) {
         this.title = title;
     }
 }

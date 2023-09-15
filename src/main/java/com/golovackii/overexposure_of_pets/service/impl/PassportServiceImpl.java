@@ -27,8 +27,12 @@ public class PassportServiceImpl implements PassportService {
 
     @Override
     public Passport update(Passport element) throws NoEntityException {
-        return repository.save(repository.findById(element.getId())
-                .orElseThrow(() -> new NoEntityException(getMessage(element.getId()))));
+        Optional<Passport> passport = repository.findById(element.getId());
+        if(passport.isPresent()) {
+            repository.save(element);
+            return element;
+        }
+        throw new NoEntityException(getMessage(element.getId()));
     }
 
     @Override

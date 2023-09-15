@@ -27,8 +27,12 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public Photo update(Photo element) throws NoEntityException {
-        return repository.save(repository.findById(element.getId()).orElseThrow(
-                () -> new NoEntityException(getMessage(element.getId()))));
+        Optional<Photo> photo = repository.findById(element.getId());
+        if(photo.isPresent()) {
+            repository.save(element);
+            return element;
+        }
+        throw new NoEntityException(getMessage(element.getId()));
     }
 
     @Override
