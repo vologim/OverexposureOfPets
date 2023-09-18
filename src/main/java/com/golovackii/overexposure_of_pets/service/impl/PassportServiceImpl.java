@@ -21,18 +21,18 @@ public class PassportServiceImpl implements PassportService {
     }
 
     @Override
-    public Passport save(Passport element) {
-        return repository.save(element);
+    public Passport save(Passport passport) {
+        return repository.save(passport);
     }
 
     @Override
-    public Passport update(Passport element) throws NoEntityException {
-        Optional<Passport> passport = repository.findById(element.getId());
-        if(passport.isPresent()) {
-            repository.save(element);
-            return element;
+    public Passport update(Passport passport) throws NoEntityException {
+        Optional<Passport> passportOptional = repository.findById(passport.getId());
+        if(passportOptional.isPresent()) {
+            repository.save(passport);
+            return passport;
         }
-        throw new NoEntityException(getMessage(element.getId()));
+        throw new NoEntityException(getMessage(passport.getId()));
     }
 
     @Override

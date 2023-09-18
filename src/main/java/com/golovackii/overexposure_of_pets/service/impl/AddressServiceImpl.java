@@ -21,18 +21,18 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Address save(Address element) {
-        return repository.save(element);
+    public Address save(Address address) {
+        return repository.save(address);
     }
 
     @Override
-    public Address update(Address element) throws NoEntityException {
-        Optional<Address> address = repository.findById(element.getId());
-        if(address.isPresent()) {
-            repository.save(element);
-            return element;
+    public Address update(Address address) throws NoEntityException {
+        Optional<Address> addressOptional = repository.findById(address.getId());
+        if(addressOptional.isPresent()) {
+            repository.save(address);
+            return address;
         }
-        throw new NoEntityException(getMessage(element.getId()));
+        throw new NoEntityException(getMessage(address.getId()));
     }
 
     @Override

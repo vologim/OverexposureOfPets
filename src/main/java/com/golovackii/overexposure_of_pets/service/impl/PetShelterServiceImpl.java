@@ -21,18 +21,18 @@ public class PetShelterServiceImpl implements PetShelterService {
     }
 
     @Override
-    public PetShelter save(PetShelter element) {
-        return repository.save(element);
+    public PetShelter save(PetShelter petShelter) {
+        return repository.save(petShelter);
     }
 
     @Override
-    public PetShelter update(PetShelter element) throws NoEntityException {
-        Optional<PetShelter> petShelter = repository.findById(element.getId());
-        if(petShelter.isPresent()) {
-            repository.save(element);
-            return element;
+    public PetShelter update(PetShelter petShelter) throws NoEntityException {
+        Optional<PetShelter> petShelterOptional = repository.findById(petShelter.getId());
+        if(petShelterOptional.isPresent()) {
+            repository.save(petShelter);
+            return petShelter;
         }
-        throw new NoEntityException(getMessage(element.getId()));
+        throw new NoEntityException(getMessage(petShelter.getId()));
     }
 
     @Override

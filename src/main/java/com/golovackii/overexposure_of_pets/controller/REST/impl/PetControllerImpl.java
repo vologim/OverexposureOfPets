@@ -8,8 +8,10 @@ import com.golovackii.overexposure_of_pets.model.Pet;
 import com.golovackii.overexposure_of_pets.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -27,25 +29,37 @@ public class PetControllerImpl implements PetController {
 
     @Override
     @PostMapping
-    public PetDTO saveElement(@RequestBody Pet element) {
-        return petMapper.toDTO(petService.save(element));
+    public PetDTO savePet(@RequestPart(name = "pet") Pet pet,
+                          @RequestPart(name = "photos", required = false) Optional<List<MultipartFile>> photos) {
+        if(photos.isPresent()) {
+            return petMapper.toDTO(petService.save(pet, photos.get()));
+        }
+        else {
+            return petMapper.toDTO(petService.save(pet));
+        }
     }
 
     @Override
     @PutMapping
-    public PetDTO updateElement(@RequestBody Pet element) throws NoEntityException {
-        return petMapper.toDTO(petService.update(element));
+    public PetDTO updatePet(@RequestPart(name = "pet") Pet pet,
+                            @RequestPart(name = "photos", required = false) Optional<List<MultipartFile>> photos) throws NoEntityException {
+        if(photos.isPresent()) {
+            return petMapper.toDTO(petService.update(pet, photos.get()));
+        }
+        else {
+            return petMapper.toDTO(petService.update(pet));
+        }
     }
 
     @Override
     @GetMapping("/{id}")
-    public PetDTO getElementBuId(@PathVariable Integer id) throws NoEntityException {
+    public PetDTO getPetBuId(@PathVariable Integer id) throws NoEntityException {
         return petMapper.toDTO(petService.getById(id));
     }
 
     @Override
     @GetMapping
-    public List<PetDTO> getAllElements() {
+    public List<PetDTO> getAllPets() {
         return petService
                 .getAllElements()
                 .stream()
@@ -55,7 +69,7 @@ public class PetControllerImpl implements PetController {
 
     @Override
     @DeleteMapping("/{id}")
-    public boolean deleteElementById(@PathVariable Integer id) throws NoEntityException {
+    public boolean deletePetById(@PathVariable Integer id) throws NoEntityException {
         return petService.deleteById(id);
     }
 }

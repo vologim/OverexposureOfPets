@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -42,5 +43,5 @@ public class Pet {
     @JoinTable(name = "photo_pet",
     joinColumns = @JoinColumn(name = "pet_id"),
     inverseJoinColumns = @JoinColumn(name = "photo_id"))
-    private List<Photo> photos;
+    private List<Photo> photos = new ArrayList<>();
 }

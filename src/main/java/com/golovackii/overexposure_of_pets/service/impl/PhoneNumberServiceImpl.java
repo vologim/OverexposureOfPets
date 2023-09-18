@@ -21,18 +21,18 @@ public class PhoneNumberServiceImpl implements PhoneNumberService {
     }
 
     @Override
-    public PhoneNumber save(PhoneNumber element) {
-        return repository.save(element);
+    public PhoneNumber save(PhoneNumber phoneNumber) {
+        return repository.save(phoneNumber);
     }
 
     @Override
-    public PhoneNumber update(PhoneNumber element) throws NoEntityException {
-        Optional<PhoneNumber> phoneNumber = repository.findById(element.getId());
-        if(phoneNumber.isPresent()) {
-            repository.save(element);
-            return element;
+    public PhoneNumber update(PhoneNumber phoneNumber) throws NoEntityException {
+        Optional<PhoneNumber> phoneNumberOptional = repository.findById(phoneNumber.getId());
+        if(phoneNumberOptional.isPresent()) {
+            repository.save(phoneNumber);
+            return phoneNumber;
         }
-        throw new NoEntityException(getMessage(element.getId()));
+        throw new NoEntityException(getMessage(phoneNumber.getId()));
     }
 
     @Override
