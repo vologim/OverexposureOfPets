@@ -6,6 +6,7 @@ import com.golovackii.overexposure_of_pets.model.Pet;
 import com.golovackii.overexposure_of_pets.model.Photo;
 import com.golovackii.overexposure_of_pets.model.Sex;
 import com.golovackii.overexposure_of_pets.repository.PetRepository;
+import com.golovackii.overexposure_of_pets.service.PhotoService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,6 +24,9 @@ class PetServiceImplTest {
 
     @Mock
     private PetRepository petRepository;
+
+    @Mock
+    private PhotoService photoService;
 
     @Mock
     private Photo photo;
@@ -83,6 +87,8 @@ class PetServiceImplTest {
         Mockito.doNothing().when(petRepository).deleteById(Mockito.anyInt());
         Mockito.when(petRepository.findById(Mockito.anyInt()))
                 .thenReturn(Optional.ofNullable(getPet()));
+        Mockito.when(photoService.deleteById(Mockito.anyInt()))
+                .thenReturn(true);
 
         boolean actual = petService.deleteById(Mockito.anyInt());
 

@@ -39,7 +39,7 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public Pet update(Pet pet) throws NoEntityException {
+    public Pet update(Pet pet) {
         Optional<Pet> petOptional = petRepository.findById(pet.getId());
         if(petOptional.isPresent()) {
             petRepository.save(petOptional.get());
@@ -49,7 +49,7 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public Pet update(Pet pet, List<MultipartFile> photos) throws NoEntityException {
+    public Pet update(Pet pet, List<MultipartFile> photos) {
         Optional<Pet> petOptional = petRepository.findById(pet.getId());
         if(petOptional.isPresent()) {
             for(MultipartFile multipartFile : photos) {
@@ -73,7 +73,7 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public boolean deleteById(Integer id) throws NoEntityException {
+    public boolean deleteById(Integer id) {
         Optional<Pet> pet = petRepository.findById(id);
         if(pet.isPresent()) {
             for(Photo photo : pet.get().getPhotos()) {

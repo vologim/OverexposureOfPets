@@ -2,7 +2,6 @@ package com.golovackii.overexposure_of_pets.controller.REST.impl;
 
 import com.golovackii.overexposure_of_pets.controller.REST.PetController;
 import com.golovackii.overexposure_of_pets.dto.PetDTO;
-import com.golovackii.overexposure_of_pets.exception.NoEntityException;
 import com.golovackii.overexposure_of_pets.mapper.PetMapper;
 import com.golovackii.overexposure_of_pets.model.Pet;
 import com.golovackii.overexposure_of_pets.service.PetService;
@@ -42,7 +41,7 @@ public class PetControllerImpl implements PetController {
     @Override
     @PutMapping
     public PetDTO updatePet(@RequestPart(name = "pet") Pet pet,
-                            @RequestPart(name = "photos", required = false) Optional<List<MultipartFile>> photos) throws NoEntityException {
+                            @RequestPart(name = "photos", required = false) Optional<List<MultipartFile>> photos) {
         if(photos.isPresent()) {
             return petMapper.toDTO(petService.update(pet, photos.get()));
         }
@@ -53,7 +52,7 @@ public class PetControllerImpl implements PetController {
 
     @Override
     @GetMapping("/{id}")
-    public PetDTO getPetBuId(@PathVariable Integer id) throws NoEntityException {
+    public PetDTO getPetBuId(@PathVariable Integer id) {
         return petMapper.toDTO(petService.getById(id));
     }
 
@@ -69,7 +68,7 @@ public class PetControllerImpl implements PetController {
 
     @Override
     @DeleteMapping("/{id}")
-    public boolean deletePetById(@PathVariable Integer id) throws NoEntityException {
+    public boolean deletePetById(@PathVariable Integer id) {
         return petService.deleteById(id);
     }
 }

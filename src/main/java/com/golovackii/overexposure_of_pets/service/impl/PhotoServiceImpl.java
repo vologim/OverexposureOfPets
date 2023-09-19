@@ -49,7 +49,7 @@ public class PhotoServiceImpl implements PhotoService {
 //    }
 
     @Override
-    public Photo getById(Integer id) throws NoEntityException {
+    public Photo getById(Integer id) {
         return repository.findById(id).orElseThrow(
                 () -> new NoEntityException(getMessageNotFound(id)));
     }
@@ -60,7 +60,7 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public boolean deleteById(Integer id) throws NoEntityException {
+    public boolean deleteById(Integer id) {
         Optional<Photo> photo = repository.findById(id);
         if(photo.isPresent()) {
             fileLoader.deleteFile(photo.get().getPathPhoto());

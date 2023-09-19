@@ -1,7 +1,6 @@
 package com.golovackii.overexposure_of_pets.controller.REST;
 
 import com.golovackii.overexposure_of_pets.dto.PetDTO;
-import com.golovackii.overexposure_of_pets.exception.NoEntityException;
 import com.golovackii.overexposure_of_pets.model.Pet;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,13 +11,13 @@ public interface PetController {
 
     PetDTO savePet(Pet pet, Optional<List<MultipartFile>> photos);
 
-    PetDTO updatePet(Pet pet, Optional<List<MultipartFile>> photos) throws NoEntityException;
+    PetDTO updatePet(Pet pet, Optional<List<MultipartFile>> photos);
 
-    PetDTO getPetBuId(Integer id) throws NoEntityException;
+    PetDTO getPetBuId(Integer id);
 
     List<PetDTO> getAllPets();
 
-    boolean deletePetById(Integer id) throws NoEntityException;
+    boolean deletePetById(Integer id);
 
 
 }

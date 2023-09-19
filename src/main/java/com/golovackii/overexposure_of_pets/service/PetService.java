@@ -1,6 +1,5 @@
 package com.golovackii.overexposure_of_pets.service;
 
-import com.golovackii.overexposure_of_pets.exception.NoEntityException;
 import com.golovackii.overexposure_of_pets.model.Pet;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,7 +11,7 @@ public interface PetService {
 
     Pet save(Pet pet, List<MultipartFile> photos);
 
-    Pet update(Pet pet) throws NoEntityException;
+    Pet update(Pet pet);
 
     Pet update(Pet pet, List<MultipartFile> photos);
 
