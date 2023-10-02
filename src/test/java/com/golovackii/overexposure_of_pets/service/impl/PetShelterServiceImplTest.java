@@ -1,10 +1,7 @@
 package com.golovackii.overexposure_of_pets.service.impl;
 
 import com.golovackii.overexposure_of_pets.exception.NoEntityException;
-import com.golovackii.overexposure_of_pets.model.Address;
-import com.golovackii.overexposure_of_pets.model.PetShelter;
-import com.golovackii.overexposure_of_pets.model.PhoneNumber;
-import com.golovackii.overexposure_of_pets.model.Sitter;
+import com.golovackii.overexposure_of_pets.model.*;
 import com.golovackii.overexposure_of_pets.repository.PetShelterRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -30,6 +27,9 @@ class PetShelterServiceImplTest {
 
     @Mock
     private Sitter sitter;
+
+    @Mock
+    private Pet pet;
 
     @Mock
     private PetShelterRepository petShelterRepository;
@@ -104,24 +104,30 @@ class PetShelterServiceImplTest {
         PetShelter petShelter1 = PetShelter.builder()
                 .id(1)
                 .organizationName("Name 1")
+                .description("Description 1")
+                .pets(List.of(pet))
                 .addressList(List.of(address))
-                .phoneNumbers(List.of(phoneNumber))
+                .phoneNumberList(List.of(phoneNumber))
                 .sitterList(List.of(sitter))
                 .build();
 
         PetShelter petShelter2 = PetShelter.builder()
                 .id(2)
                 .organizationName("Name 2")
+                .description("Description 2")
+                .pets(List.of(pet))
                 .addressList(List.of(address))
-                .phoneNumbers(List.of(phoneNumber))
+                .phoneNumberList(List.of(phoneNumber))
                 .sitterList(List.of(sitter))
                 .build();
 
         PetShelter petShelter3 = PetShelter.builder()
                 .id(3)
                 .organizationName("Name 3")
+                .description("Description 3")
+                .pets(List.of(pet))
                 .addressList(List.of(address))
-                .phoneNumbers(List.of(phoneNumber))
+                .phoneNumberList(List.of(phoneNumber))
                 .sitterList(List.of(sitter))
                 .build();
 

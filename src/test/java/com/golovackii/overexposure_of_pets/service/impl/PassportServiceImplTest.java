@@ -16,8 +16,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @ExtendWith(MockitoExtension.class)
 class PassportServiceImplTest {
 
@@ -97,7 +95,7 @@ class PassportServiceImplTest {
         Passport passport1 = Passport.builder()
                 .id(1)
                 .firstName("First name 1")
-                .lastName("Last name 1")
+                .surname("Last name 1")
                 .passportNumber("111111")
                 .sex(Sex.FEMALE)
                 .photos(List.of(photo))
@@ -106,7 +104,7 @@ class PassportServiceImplTest {
         Passport passport2 = Passport.builder()
                 .id(2)
                 .firstName("First name 2")
-                .lastName("Last name 2")
+                .surname("Last name 2")
                 .passportNumber("222222")
                 .sex(Sex.MALE)
                 .photos(List.of(photo))
@@ -115,7 +113,7 @@ class PassportServiceImplTest {
         Passport passport3 = Passport.builder()
                 .id(3)
                 .firstName("First name 3")
-                .lastName("Last name 3")
+                .surname("Last name 3")
                 .passportNumber("333333")
                 .sex(Sex.FEMALE)
                 .photos(List.of(photo))

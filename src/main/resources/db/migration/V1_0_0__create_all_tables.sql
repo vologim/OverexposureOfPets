@@ -128,7 +128,8 @@ CREATE TABLE person
     id SERIAL PRIMARY KEY,
     first_name varchar(20) NOT NULL,
     surname varchar(20) NOT NULL,
-    date_birth DATE NOT NULL
+    photo_id int,
+    FOREIGN KEY (photo_id) REFERENCES photo(id)
 );
 
 CREATE TABLE person_numberPhone
@@ -137,17 +138,8 @@ CREATE TABLE person_numberPhone
     number_phone_id int,
     FOREIGN KEY (person_id) REFERENCES person(id),
     FOREIGN KEY (number_phone_id) REFERENCES phone_number(id)
-)
-
-CREATE TABLE person_photo
-(
-    person_id int,
-    photo_id int,
-    FOREIGN KEY (person_id) REFERENCES person(id),
-    FOREIGN KEY (photo_id) REFERENCES photo(id)
 );
 
--- может быть ошибка
-ALTER TABLE pet ADD CONSTRAINT FOREIGN KEY (pet_shelter_id) REFERENCES pet_shelter(id);
-ALTER TABLE pet ADD CONSTRAINT FOREIGN KEY (person_id) REFERENCES person(id);
-ALTER TABLE pet ADD CONSTRAINT FOREIGN KEY (sitter_id) REFERENCES sitter(id);
+ALTER TABLE pet ADD CONSTRAINT FK_Pet_PetShelterId FOREIGN KEY (pet_shelter_id) REFERENCES pet_shelter(id);
+ALTER TABLE pet ADD CONSTRAINT FK_Pet_PersonId FOREIGN KEY (person_id) REFERENCES person(id);
+ALTER TABLE pet ADD CONSTRAINT FK_Pet_SitterId FOREIGN KEY (sitter_id) REFERENCES sitter(id);

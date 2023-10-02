@@ -3,6 +3,8 @@ package com.golovackii.overexposure_of_pets.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -21,8 +23,15 @@ public class Passport {
     @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name")
-    private String lastName;
+    @Column(name = "surname")
+    private String surname;
+
+    @Column(name = "date_birth")
+    private LocalDate dateBirth;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "registration_address_id")
+    private Address registrationAddress;
 
     @Column(name = "passport_number", unique = true)
     private String passportNumber;
@@ -32,6 +41,8 @@ public class Passport {
     private Sex sex;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "passport_id")
-    private List<Photo> photos;
+    @JoinTable(name = "passport_photo",
+    joinColumns = @JoinColumn(name = "passport_id"),
+    inverseJoinColumns = @JoinColumn(name = "photo_id"))
+    private List<Photo> photos = new ArrayList<>();
 }

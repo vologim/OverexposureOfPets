@@ -98,30 +98,24 @@ class PersonServiceImplTest {
         Person person1 = Person.builder()
                 .id(1)
                 .firstName("Name 1")
-                .lastName("Last name 1")
-                .dateBirth(LocalDate.of(1985, 11, 9))
+                .surname("Surname 1")
                 .phoneNumbers(List.of(phoneNumber))
-                .address(address)
                 .pets(List.of(pet))
                 .build();
 
         Person person2 = Person.builder()
                 .id(2)
                 .firstName("Name 2")
-                .lastName("Last name 2")
-                .dateBirth(LocalDate.of(1982, 2, 9))
+                .surname("Surname 2")
                 .phoneNumbers(List.of(phoneNumber))
-                .address(address)
                 .pets(List.of(pet))
                 .build();
 
         Person person3 = Person.builder()
                 .id(3)
                 .firstName("Name 3")
-                .lastName("Last name 3")
-                .dateBirth(LocalDate.of(1993, 11, 9))
+                .surname("Surname 3")
                 .phoneNumbers(List.of(phoneNumber))
-                .address(address)
                 .pets(List.of(pet))
                 .build();
 
